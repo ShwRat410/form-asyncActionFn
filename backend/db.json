@@ -1,6 +1,13 @@
 {
   "opinions": [
     {
+      "id": 1741376057306,
+      "votes": 0,
+      "userName": "shweta",
+      "title": "Redux",
+      "body": "Redux is great"
+    },
+    {
       "id": 1,
       "userName": "Maximilian Schwarzmüller",
       "title": "Do yourself a favor and learn React!",

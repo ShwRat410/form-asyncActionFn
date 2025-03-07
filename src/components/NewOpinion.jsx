@@ -1,34 +1,42 @@
-import { useActionState } from "react"
+import { useActionState, use } from "react"
+import {OpinionsContext} from '../store/opinions-context'
 
-function shareOpinionActionFn(prevFormData,formData){
-  const userName = formData.get('userName')
-  const title = formData.get('title')
-  const body = formData.get('body')
-
-  const errors=[]
-  if(userName==''){
-    errors.push("Username can't be empty")
-  }
-  if(title==''){
-    errors.push("Title can't be empty")
-  }
-  if(body==''){
-    errors.push("Body can't be empty")
-  }
-  if(errors.length>0){
-    return({
-      errors:errors,
-      enteredData:{
-        userName,
-        title,
-        body
-      }
-    })
-  }
-  return {errors:null}
-}
 
 export function NewOpinion() {
+
+  const{addOpinion} = use(OpinionsContext)
+  
+  async function shareOpinionActionFn(prevFormData,formData){
+
+    const userName = formData.get('userName')
+    const title = formData.get('title')
+    const body = formData.get('body')
+  
+    const errors=[]
+    if(userName==''){
+      errors.push("Username can't be empty")
+    }
+    if(title==''){
+      errors.push("Title can't be empty")
+    }
+    if(body==''){
+      errors.push("Body can't be empty")
+    }
+    if(errors.length>0){
+      return({
+        errors:errors,
+        enteredData:{
+          userName,
+          title,
+          body
+        }
+      })
+    }
+  
+    await addOpinion({userName,title,body})
+  
+    return {errors:null}
+  }
 
   const [formState,formAction] = useActionState(shareOpinionActionFn,{errors:null})
 
