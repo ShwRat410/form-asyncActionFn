@@ -1,11 +1,16 @@
+import { use } from "react";
+import {OpinionsContext} from '../store/opinions-context.jsx'
+
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
 
-  function handleDownvote(){
-    console.log("downvote")
+  const {upvoteOpinion,downvoteOpinion } = use(OpinionsContext)
+
+  async function handleDownvote(){
+    await downvoteOpinion(id)
   }
 
-  function handleUpvote(){
-    console.log("upvote")
+  async function handleUpvote(){
+    await upvoteOpinion(id)
   }
 
   return (
